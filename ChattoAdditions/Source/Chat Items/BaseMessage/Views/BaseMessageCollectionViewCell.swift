@@ -128,6 +128,7 @@ open class BaseMessageCollectionViewCell<BubbleViewType>: UICollectionViewCell, 
     func createAvatarView() -> UIImageView! {
         let avatarImageView = UIImageView(frame: CGRect.zero)
         avatarImageView.isUserInteractionEnabled = true
+        avatarImageView.contentMode = .scaleAspectFill
         return avatarImageView
     }
 
@@ -222,6 +223,8 @@ open class BaseMessageCollectionViewCell<BubbleViewType>: UICollectionViewCell, 
         self.bubbleView.layoutIfNeeded()
 
         self.avatarView.bma_rect = layoutModel.avatarViewFrame
+        self.avatarView.layer.cornerRadius = self.avatarView.frame.size.width / 2
+        self.avatarView.clipsToBounds = true
 
         if self.accessoryTimestampView.superview != nil {
             let layoutConstants = baseStyle.layoutConstants(viewModel: messageViewModel)
